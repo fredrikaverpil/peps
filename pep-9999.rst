@@ -1,5 +1,5 @@
 PEP: 9999
-Title: Common Configuration For Tools
+Title: Package index configuration standardization
 Author: Fredrik Averpil <fredrik at averpil.com>
 Status: Draft
 Type: Informational
