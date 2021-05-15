@@ -107,9 +107,9 @@ A repository's credentials has the following options::
 Package discovery
 -----------------
 
-The order of the repository definitions in ``config.toml`` shall be respected when searching for packages. This allows custom package indexes to take precendence over e.g. a default PyPI repository and the use of package shadowing.
-
 The PyPI repository (``repositories.pypi``) does not have to specified in the ``config.toml``. If not specified, it will used as the first package index. By explicitly defining it, the repository options can be used and it can be ordered differently.
+
+The order of the repository definitions in ``config.toml`` shall be respected when searching for packages. This allows custom package indexes to take precendence over e.g. a default PyPI repository and the use of package shadowing.
 
 
 Configuration file discovery
