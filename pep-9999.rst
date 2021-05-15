@@ -17,7 +17,7 @@ This PEP standardizes configuration of PyPI repository package indexes.
 Motivation
 ==========
 
-Workflow tools come up with their own configuration mechanisms for PyPI package indexes, as there is no standard for this. This causes pain points and fragmentation.
+Workflow tools come up with their own configuration mechanisms for PyPI package indexes, as there is no standard for this. This causes fragmentation and pain points.
 
 Examples of such configuration files:
 
@@ -61,11 +61,11 @@ A repository has the following options::
     ==================  ===========  =============================================
     Option              Type         Description
     ==================  ===========  =============================================
+    proxy               str          Specify proxy in the form ``[user:passwd]@proxy.server:port`` where password is base64-encoded.
     shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
     type                str          Package index type (default: pypi)
     url                 str          URL to repository
     ==================  ===========  =============================================
-
 
 
 The auth.toml file
