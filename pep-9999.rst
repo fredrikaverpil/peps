@@ -39,6 +39,11 @@ The specification consists of three parts: the configuration definition, package
 Configuration definition
 ------------------------
 
+The configuration is split into two files:
+
+* config.toml for general configuration
+* auth.toml for credentials
+
 
 The config.toml file
 ''''''''''''''''''''
@@ -76,7 +81,8 @@ Credentials are stored in the ``auth.toml`` file, under the ``[authentication]``
     [authentication]
 
     [authentication.pypi]
-    token = "pypi-AgEIcHlwaS5vcmcCJDJjMmI5NDJmLWIzNzQtNDc3ZC04ZmRkLTM4NDEzY2M1ZTU5MAACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgV91r8iEUUz7Q5xbsfi_KGiO3wrJR2_IOOpnFyLo62bk"
+    username = "__token__"
+    password = "pypi-AgEIcHlwaS5vcmcCJDJjMmI5NDJmLWIzNzQtNDc3ZC04ZmRkLTM4NDEzY2M1ZTU5MAACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgV91r8iEUUz7Q5xbsfi_KGiO3wrJR2_IOOpnFyLo62bk"
 
     [authentication.myrepo1]
     username = "foo"
@@ -86,7 +92,8 @@ Credentials are stored in the ``auth.toml`` file, under the ``[authentication]``
 
 Instead of specifying the credentials in this file, Keyring can be used::
 
-    Example needed here...
+    keyring set https://pypi.org/simple/ __token__
+    keyring set <repository URL> <private-repository username>
 
 
 A repository's credentials has the following options::
@@ -96,10 +103,9 @@ A repository's credentials has the following options::
     ==================  ===========  ===============================================
     cert                str          Path to certificate authority bundle (*.pem)
     cert-client         str          Path to client certificate (*.pem)
-    password            str          The password for the repository, base64-encoded. When token is used, enter it here.
+    password            str          The password for the repository, base64-encoded. When token is used, enter it here in clear-text.
     proxy_password      str          The password for the proxy server, base64-encoded.
     proxy_username      str          The username for the proxy server
-    token               str          When token should be used instead of username and password
     username            str          The username for the repository
     ==================  ===========  ===============================================
 
@@ -115,8 +121,39 @@ The order of the repository definitions in ``config.toml`` shall be respected wh
 Configuration file discovery
 ----------------------------
 
+The locations of the configuration files vary slightly across platforms. You may have per-user, per-virtualenv or global (shared amongst all users) configuration:
+
+If multiple configuration files are found, then they are combined in the following order:
+
+1. The global file is read
+2. The per-user file is read
+3. The virtualenv-specific file is read
+
+Each file read overrides any values read from previous files.
 
 
+Global
+''''''
+
+* Unix: ``$HOME/.config/python/``
+* macOS: ``$HOME/.config/python/``
+* Windows: ``%APPDATA%\python\``
+
+
+Per-user
+''''''''
+
+* Unix: ``$HOME/.config/python/``
+* macOS: ``$HOME/.config/python/``
+* Windows: ``%APPDATA%\python\``
+
+
+Per-virtualenv
+''''''''''''''
+
+* Unix: ``$VIRTUAL_ENV/.python/``
+* macOS: ``$VIRTUAL_ENV/.python/``
+* Windows: ``%VIRTUAL_ENV%\.python\``
 
 
 
