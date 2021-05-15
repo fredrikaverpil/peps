@@ -106,7 +106,7 @@ A repository's credentials has the following attributes::
     password            str          The password for the repository, base64-encoded. When token is used, enter it here in clear-text.
     proxy_password      str          The password for the proxy server, base64-encoded.
     proxy_username      str          The username for the proxy server
-    username            str          The username for the repository
+    username            str          The username for the repository. When token is used, set this to ``__token__``.
     ==================  ===========  ===============================================
 
 
