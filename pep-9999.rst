@@ -62,8 +62,6 @@ A repository has the following options::
     ==================  ===========  =============================================
     proxy_port          int          The port of the proxy server to use (default: 80)
     proxy_url           str          The URL to the proxy server
-    proxy_auth          str          The corresponding authentication section in ``auth.toml``, stating the username and base64-encoded password
-    base64-encoded.
     shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
     type                str          Package index type (default: pypi)
     url                 str          URL to repository
@@ -73,7 +71,7 @@ A repository has the following options::
 The auth.toml file
 ''''''''''''''''''
 
-Credentials are stored in the ``auth.toml`` file::
+Credentials are stored in the ``auth.toml`` file, under the ``[authentication]`` section. There is a correlation between the repository name and the authentication section's name::
 
     [authentication]
 
@@ -99,6 +97,8 @@ A repository's credentials has the following options::
     cert                str          Path to certificate authority bundle (*.pem)
     cert-client         str          Path to client certificate (*.pem)
     password            str          The password, base64-encoded. When token is used, enter it here.
+    proxy_password      str          The password for the proxy server, base64-encoded.
+    proxy_username      str          The username for the proxy server
     token               str          When token should be used instead of username and password
     username            str          The username
     ==================  ===========  ===============================================
@@ -109,7 +109,12 @@ Package discovery
 
 The order of the repository definitions in ``config.toml`` shall be respected when searching for packages. This allows custom package indexes to take precendence over e.g. a default PyPI repository and the use of package shadowing.
 
-The PyPI repository (``repositories.pypi``) does not have to specified in the ``config.toml`` and will then be used as the first package index. By explicitly defining it, the repository options can be used and it can be ordered differently.
+The PyPI repository (``repositories.pypi``) does not have to specified in the ``config.toml``. If not specified, it will used as the first package index. By explicitly defining it, the repository options can be used and it can be ordered differently.
+
+
+Configuration file discovery
+----------------------------
+
 
 
 
