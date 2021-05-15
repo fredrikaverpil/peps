@@ -7,17 +7,16 @@ Created: 05-May-2021
 Post-History: <dates of postings to python-ideas and/or python-dev>
 
 
-
 Abstract
 ========
 
-This PEP standardizes configuration of PyPI repository package indexes.
+This PEP standardizes configuration of PyPI repositories.
 
 
 Motivation
 ==========
 
-Workflow tools come up with their own configuration mechanisms for PyPI package indexes, as there is no standard for this. This causes fragmentation and pain points.
+Workflow tools come up with their own configuration mechanisms for PyPI repositories, as there is no standard for this. This causes fragmentation and pain points.
 
 Examples of such configuration files:
 
@@ -28,6 +27,8 @@ Examples of such configuration files:
 
 Rationale
 =========
+
+While this PEP aim to come up with a unified PyPI repository configuration, thought has been given to use these configuration files for other purposes. For example, PyPI repositories are assumed in this PEP, but a ``type`` attribute could be introduced which would default to ``pypi`` down the line, to allow for other package repository types. One could also think tools could start taking advantage of the fact that the ``config.toml`` file and its discovery is a standard, and can be relied on.
 
 
 Specification
@@ -41,8 +42,8 @@ Configuration definition
 
 The configuration is split into two files:
 
-* config.toml for general configuration
-* auth.toml for credentials
+* ``config.toml`` for general configuration
+* ``auth.toml`` for credentials
 
 
 The config.toml file
@@ -60,7 +61,7 @@ Package index configuration is defined in the ``config.toml`` file, under the ``
     url = "http://myserver2.org/simple"
 
 
-A repository has the following options::
+A repository has the following attributes::
 
     ==================  ===========  =============================================
     Option              Type         Description
@@ -68,7 +69,6 @@ A repository has the following options::
     proxy_port          int          The port of the proxy server to use (default: 80)
     proxy_url           str          The URL to the proxy server
     shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
-    type                str          Package index type (default: pypi)
     url                 str          URL to repository
     ==================  ===========  =============================================
 
@@ -89,14 +89,13 @@ Credentials are stored in the ``auth.toml`` file, under the ``[authentication]``
     password = "YmFyCg=="
 
 
-
 Instead of specifying the credentials in this file, Keyring can be used::
 
     keyring set https://pypi.org/simple/ __token__
     keyring set <repository URL> <private-repository username>
 
 
-A repository's credentials has the following options::
+A repository's credentials has the following attributes::
 
     ==================  ===========  ===============================================
     Option              Type         Description
