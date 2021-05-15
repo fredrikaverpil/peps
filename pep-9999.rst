@@ -53,8 +53,9 @@ Package index configuration is defined in the ``config.toml`` file, under the ``
     url = "http://myserver2.org/simple"
 
 
-The order of the repository definitions are respected when searching for packages. This allows custom package indexes to take precendence over e.g. a default PyPI repository.
+The order of the repository definitions shall be respected when searching for packages. This allows custom package indexes to take precendence over e.g. a default PyPI repository.
 
+The PyPI repository (``repositories.pypi``) does not have to specified in the ``config.toml`` and will then be used as the first package index. By explicitly defining it, the repository options can be used and it can be ordered differently.
 
 A repository has the following options::
 
