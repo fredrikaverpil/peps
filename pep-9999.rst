@@ -60,7 +60,10 @@ A repository has the following options::
     ==================  ===========  =============================================
     Option              Type         Description
     ==================  ===========  =============================================
-    proxy               str          Specify proxy in the form ``[user:passwd]@proxy.server:port`` where password is base64-encoded.
+    proxy_port          int          The port of the proxy server to use (default: 80)
+    proxy_url           str          The URL to the proxy server
+    proxy_auth          str          The corresponding authentication section in ``auth.toml``, stating the username and base64-encoded password
+    base64-encoded.
     shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
     type                str          Package index type (default: pypi)
     url                 str          URL to repository
