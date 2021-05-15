@@ -35,11 +35,13 @@ Specification
 
 The specification consists of three parts: the configuration definition, package discovery and configuration file discovery.
 
+
 Configuration definition
 ------------------------
 
+
 The config.toml file
---------------------
+''''''''''''''''''''
 
 Package index configuration is defined in the ``config.toml`` file, under the ``[repositories]`` section::
 
@@ -52,10 +54,6 @@ Package index configuration is defined in the ``config.toml`` file, under the ``
     [repostiories.myrepo1]
     url = "http://myserver2.org/simple"
 
-
-The order of the repository definitions shall be respected when searching for packages. This allows custom package indexes to take precendence over e.g. a default PyPI repository.
-
-The PyPI repository (``repositories.pypi``) does not have to specified in the ``config.toml`` and will then be used as the first package index. By explicitly defining it, the repository options can be used and it can be ordered differently.
 
 A repository has the following options::
 
@@ -70,14 +68,13 @@ A repository has the following options::
 
 
 The auth.toml file
-------------------
+''''''''''''''''''
 
 Credentials are stored in the ``auth.toml`` file::
 
     [authentication]
 
     [authentication.pypi]
-    username = "__token__"
     token = "pypi-AgEIcHlwaS5vcmcCJDJjMmI5NDJmLWIzNzQtNDc3ZC04ZmRkLTM4NDEzY2M1ZTU5MAACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgV91r8iEUUz7Q5xbsfi_KGiO3wrJR2_IOOpnFyLo62bk"
 
     [authentication.myrepo1]
@@ -96,11 +93,23 @@ A repository's credentials has the following options::
     ==================  ===========  ===============================================
     Option              Type         Description
     ==================  ===========  ===============================================
-    cert                str          Path to certificate authority (*.pem)
+    cert                str          Path to certificate authority bundle (*.pem)
     cert-client         str          Path to client certificate (*.pem)
-    username            str          The username. Use ``__token__`` when a token is to be used.
     password            str          The password, base64-encoded. When token is used, enter it here.
+    token               str          When token should be used instead of username and password
+    username            str          The username
     ==================  ===========  ===============================================
+
+
+Package discovery
+-----------------
+
+The order of the repository definitions in ``config.toml`` shall be respected when searching for packages. This allows custom package indexes to take precendence over e.g. a default PyPI repository and the use of package shadowing.
+
+The PyPI repository (``repositories.pypi``) does not have to specified in the ``config.toml`` and will then be used as the first package index. By explicitly defining it, the repository options can be used and it can be ordered differently.
+
+
+
 
 
 Backwards Compatibility
