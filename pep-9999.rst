@@ -33,7 +33,7 @@ Rationale
 Specification
 =============
 
-The specification consists of two parts: the configuration definition and its discovery.
+The specification consists of three parts: the configuration definition, package discovery and configuration file discovery.
 
 Configuration definition
 ------------------------
