@@ -96,11 +96,11 @@ A repository's credentials has the following options::
     ==================  ===========  ===============================================
     cert                str          Path to certificate authority bundle (*.pem)
     cert-client         str          Path to client certificate (*.pem)
-    password            str          The password, base64-encoded. When token is used, enter it here.
+    password            str          The password for the repository, base64-encoded. When token is used, enter it here.
     proxy_password      str          The password for the proxy server, base64-encoded.
     proxy_username      str          The username for the proxy server
     token               str          When token should be used instead of username and password
-    username            str          The username
+    username            str          The username for the repository
     ==================  ===========  ===============================================
 
 
