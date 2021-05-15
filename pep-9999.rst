@@ -66,6 +66,7 @@ A repository has the following attributes::
     ==================  ===========  =============================================
     Option              Type         Description
     ==================  ===========  =============================================
+    final               bool         Make it impossible to override/remove the repository configuration (default: false)
     proxy_port          int          The port of the proxy server to use (default: 80)
     proxy_url           str          The URL to the proxy server
     shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
@@ -122,7 +123,7 @@ Configuration file discovery
 
 The locations of the configuration files vary slightly across platforms. You may have per-user, per-virtualenv or global (shared amongst all users) configuration:
 
-If multiple configuration files are found, then they are combined in the following order:
+If multiple configuration files are found, then they are combined (merge and override) in the following order:
 
 1. The global file is read
 2. The per-user file is read
