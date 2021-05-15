@@ -1,0 +1,161 @@
+PEP: 9999
+Title: Common Configuration For Tools
+Author: Fredrik Averpil <fredrik at averpil.com>
+Status: Draft
+Type: Informational
+Created: 05-May-2021
+Post-History: <dates of postings to python-ideas and/or python-dev>
+
+
+
+Abstract
+========
+
+This PEP standardizes configuration of PyPI repository package indexes.
+
+
+Motivation
+==========
+
+Workflow tools come up with their own configuration mechanisms for PyPI package indexes, as there is no standard for this. This causes pain points and fragmentation.
+
+Examples of such configuration files:
+
+* Pip's ``pip.conf`` and ``pip.ini``
+* Packaging's ``.pypirc`` (also used by tools like Flit and Twine)
+* Poetry's ``config.toml`` and ``auth.toml``
+
+
+Rationale
+=========
+
+
+Specification
+=============
+
+The specification consists of two parts: the configuration definition and its discovery.
+
+Configuration definition
+------------------------
+
+The config.toml file
+--------------------
+
+Package index configuration is defined in the ``config.toml`` file, under the ``[repositories]`` section::
+
+
+    [repositories]
+
+    [repostiories.pypi]
+    url = "https://pypi.org/simple/"
+
+    [repostiories.myrepo1]
+    url = "http://myserver2.org/simple"
+
+
+The order of the repository definitions are respected when searching for packages. This allows custom package indexes to take precendence over e.g. a default PyPI repository.
+
+
+A repository has the following options::
+
+    ==================  ===========  =============================================
+    Option              Type         Description
+    ==================  ===========  =============================================
+    shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
+    type                str          Package index type (default: pypi)
+    url                 str          URL to repository
+    ==================  ===========  =============================================
+
+
+
+The auth.toml file
+------------------
+
+Credentials are stored in the ``auth.toml`` file::
+
+    [authentication]
+
+    [authentication.repo1]
+    username = "foo"
+    password = "YmFyCg=="
+
+    [authentication.repo2]
+    username = "__token__"
+    token = "pypi-AgEIcHlwaS5vcmcCJDJjMmI5NDJmLWIzNzQtNDc3ZC04ZmRkLTM4NDEzY2M1ZTU5MAACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgV91r8iEUUz7Q5xbsfi_KGiO3wrJR2_IOOpnFyLo62bk"
+
+
+Instead of specifying the credentials in this file, Keyring can be used::
+
+    Example needed here...
+
+
+A repository's credentials has the following options::
+
+    ==================  ===========  ===============================================
+    Option              Type         Description
+    ==================  ===========  ===============================================
+    cert                str          Path to certificate authority (*.pem)
+    cert-client         str          Path to client certificate (*.pem)
+    username            str          The username. Use ``__token__`` when a token is to be used.
+    password            str          The password, base64-encoded. When token is used, enter it here.
+    ==================  ===========  ===============================================
+
+
+Backwards Compatibility
+=======================
+
+[Describe potential impact and severity on pre-existing code.]
+
+
+Security Implications
+=====================
+
+[How could a malicious user take advantage of this new feature?]
+
+
+How to Teach This
+=================
+
+[How to teach users, new and experienced, how to apply the PEP to their work.]
+
+
+Reference Implementation
+========================
+
+[Link to any existing implementation and details about its state, e.g. proof-of-concept.]
+
+
+Rejected Ideas
+==============
+
+[Why certain ideas that were brought while discussing this PEP were not ultimately pursued.]
+
+
+Open Issues
+===========
+
+[Any points that are still being decided/discussed.]
+
+
+References
+==========
+
+[A collection of URLs used as references through the PEP.]
+
+
+Copyright
+=========
+
+This document is placed in the public domain or under the
+CC0-1.0-Universal license, whichever is more permissive.
+
+
+
+..
+   Local Variables:
+   mode: indented-text
+   indent-tabs-mode: nil
+   sentence-end-double-space: t
+   fill-column: 70
+   coding: utf-8
+   End:
