@@ -75,13 +75,14 @@ Credentials are stored in the ``auth.toml`` file::
 
     [authentication]
 
-    [authentication.repo1]
+    [authentication.pypi]
+    username = "__token__"
+    token = "pypi-AgEIcHlwaS5vcmcCJDJjMmI5NDJmLWIzNzQtNDc3ZC04ZmRkLTM4NDEzY2M1ZTU5MAACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgV91r8iEUUz7Q5xbsfi_KGiO3wrJR2_IOOpnFyLo62bk"
+
+    [authentication.myrepo1]
     username = "foo"
     password = "YmFyCg=="
 
-    [authentication.repo2]
-    username = "__token__"
-    token = "pypi-AgEIcHlwaS5vcmcCJDJjMmI5NDJmLWIzNzQtNDc3ZC04ZmRkLTM4NDEzY2M1ZTU5MAACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgV91r8iEUUz7Q5xbsfi_KGiO3wrJR2_IOOpnFyLo62bk"
 
 
 Instead of specifying the credentials in this file, Keyring can be used::
