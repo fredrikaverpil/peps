@@ -113,7 +113,7 @@ A repository's credentials has the following attributes::
 Package discovery
 -----------------
 
-The PyPI repository (``repositories.pypi``) does not have to specified in the ``config.toml``. If not specified, it will be used as the first package index. By explicitly defining it, the repository attributes can be used and it can be ordered differently.
+The PyPI repository (``repositories.pypi``) does not have to be specified in the ``config.toml``. If not specified, it will be used as the first package index by default. However, by explicitly defining it, the repository attributes can be used and it can be ordered differently.
 
 The order of the repository definitions in ``config.toml`` shall be respected when searching for packages. This allows custom package indexes to take precendence over e.g. a default PyPI repository and the use of package shadowing.
 
