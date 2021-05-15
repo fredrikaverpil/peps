@@ -28,7 +28,7 @@ Examples of such configuration files:
 Rationale
 =========
 
-While this PEP aim to come up with a unified PyPI repository configuration, thought has been given to use these configuration files for other purposes. For example, PyPI repositories are assumed in this PEP, but a ``type`` attribute could be introduced which would default to ``pypi`` down the line, to allow for other package repository types. Tools could also start taking advantage of the fact that the ``config.toml`` file and its discovery is a standard, and use this for their own configuration.
+While this PEP aim to come up with a unified PyPI repository configuration, thought has been given so to be able to extend the configuration later. For example, PyPI repositories are assumed in this PEP, but a ``type`` attribute could be introduced which would default to ``pypi`` down the line, to allow for other package repository types. Any tool could also start taking advantage of the fact that the configuration files and their discovery is a standard, and use this for their own configuration.
 
 
 Specification
@@ -42,7 +42,7 @@ Configuration definition
 
 The configuration is split into two files:
 
-* ``config.toml`` for general configuration
+* ``config.toml`` for PyPI repository configuration
 * ``auth.toml`` for credentials
 
 
