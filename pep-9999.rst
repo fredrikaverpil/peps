@@ -67,8 +67,7 @@ A repository has the following attributes::
     Attribute           Type         Description
     ==================  ===========  =============================================
     final               bool         Make it impossible to override/remove the repository configuration (default: false)
-    proxy_port          int          The port of the proxy server to use (default: 80)
-    proxy_url           str          The URL to the proxy server
+    proxy_url           str          The URL to the proxy server, can contain a port
     shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
     url                 str          URL to repository
     ==================  ===========  =============================================
@@ -103,10 +102,11 @@ A repository's credentials has the following attributes::
     ==================  ===========  ===============================================
     cert                str          Path to certificate authority bundle (*.pem)
     cert-client         str          Path to client certificate (*.pem)
+    enabled             bool         Whether the repository should be used or not (default: true)
     password            str          The password for the repository, base64-encoded. When token is used, enter it here in clear-text.
     proxy_password      str          The password for the proxy server, base64-encoded.
     proxy_username      str          The username for the proxy server
-    username            str          The username for the repository. When token is used, set this to ``__token__``.
+    username            str          The username for the repository.
     ==================  ===========  ===============================================
 
 
