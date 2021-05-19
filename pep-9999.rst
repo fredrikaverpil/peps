@@ -137,7 +137,7 @@ Global
 
 * Unix: ``/etc/.config/python/``
 * macOS: ``/Library/Application Support/python/``
-* Windows: ``%APPDATA%\python\``
+* Windows: ``%PROGRAMDATA%\Python``
 
 
 Per-user
