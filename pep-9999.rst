@@ -136,7 +136,7 @@ Global
 ''''''
 
 * Unix: ``/etc/.config/python/``
-* macOS: ``/etc/.config/python/``
+* macOS: ``/Library/Application Support/python/``
 * Windows: ``%APPDATA%\python\``
 
 
