@@ -135,8 +135,8 @@ Each file read overrides any values read from previous files.
 Global
 ''''''
 
-* Unix: ``$HOME/.config/python/``
-* macOS: ``$HOME/.config/python/``
+* Unix: ``/etc/.config/python/``
+* macOS: ``/etc/.config/python/``
 * Windows: ``%APPDATA%\python\``
 
 
