@@ -103,10 +103,10 @@ A repository's credentials has the following attributes::
     cert                str          Path to certificate authority bundle (*.pem)
     cert-client         str          Path to client certificate (*.pem)
     enabled             bool         Whether the repository should be used or not (default: true)
-    password            str          The password for the repository, base64-encoded. When token is used, enter it here in clear-text.
-    proxy_password      str          The password for the proxy server, base64-encoded.
+    password            str          The password for the repository
+    proxy_password      str          The password for the proxy server
     proxy_username      str          The username for the proxy server
-    username            str          The username for the repository.
+    username            str          The username for the repository
     ==================  ===========  ===============================================
 
 
@@ -184,7 +184,11 @@ Reference Implementation
 Rejected Ideas
 ==============
 
-[Why certain ideas that were brought while discussing this PEP were not ultimately pursued.]
+Base64 encoding for passwords
+'''''''''''''''''''''''''''''
+
+Base64 encoding for passwords were considered, to avoid "over the shoulder" peeking.
+However, this complicates being able to tell the difference between a password and a token.
 
 
 Open Issues
