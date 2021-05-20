@@ -134,15 +134,13 @@ Tools should respect priority by acting as if all lower priority repositories we
 Configuration file discovery
 ----------------------------
 
-The locations of the configuration files (``config.toml`` and ``auth.toml``) vary slightly across platforms. You may have per-user, per-virtualenv or global (shared amongst all users) configuration:
+The locations of the configuration files (``config.toml`` and ``auth.toml``) vary slightly across platforms. You may have global, per-user and per-environment configuration:
 
-If multiple configuration files are found, then they are combined (merge and override) in the following order:
+If multiple configuration files are found, then they are merged in the following order:
 
-1. The global file is read
-2. The per-user file is read
-3. The virtualenv-specific file is read
-
-Each file read overrides any values read from previous files.
+1. The global files are read
+2. The per-user files are read
+3. The virtualenv-specific files are read
 
 
 Global
@@ -169,10 +167,12 @@ Per-virtualenv
 * Windows: ``%VIRTUAL_ENV%\.python\``
 
 
-Configuration file merging
-''''''''''''''''''''''''''
+Configuration file merging strategy
+'''''''''''''''''''''''''''''''''''
 
-The way the configuration files are merged is by "deep dictionary update", where the ``config.toml`` is updated with any values of the ``auth.toml`` in the same location.
+The way the configuration files are merged is by "deep dictionary update", where the ``config.toml`` is updated with any values of the ``auth.toml`` in the particular location. In short, the keys and values are accumulated, where ``auth.toml`` takes precedence in the case of duplicate keys for the given location.
+
+There is no way to _remove_ data from the configuration which has once been defined. However, repositories can be disabled using the ``enable`` attribute.
 
 To do: Python code snippet here to illustrate the exact logic.
 
