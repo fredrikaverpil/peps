@@ -69,7 +69,7 @@ A repository has the following attributes::
     final               bool         Make it impossible to override/remove the repository configuration (default: false)
     proxy_url           str          The URL to the proxy server, can contain a port
     shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
-    url                 str          URL to repository
+    url                 str          URL to repository, can contain a port
     ==================  ===========  =============================================
 
 
