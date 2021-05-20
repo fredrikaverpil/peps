@@ -49,7 +49,7 @@ The configuration is split into two files:
 The config.toml file
 ''''''''''''''''''''
 
-Package index configuration is defined in the ``config.toml`` file, under the ``[repositories]`` section::
+Package index configuration is defined in the ``config.toml`` file::
 
 
     [repositories]
@@ -59,24 +59,6 @@ Package index configuration is defined in the ``config.toml`` file, under the ``
 
     [repostiories.myrepo1]
     url = "http://myserver2.org/simple"
-
-
-A repository has the following attributes::
-
-    ==================  ===========  =============================================
-    Attribute           Type         Description
-    ==================  ===========  =============================================
-    final               bool         Make it impossible to override/remove the repository configuration (default: false)
-    proxy_url           str          The URL to the proxy server, can contain a port
-    shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
-    url                 str          URL to repository, can contain a port
-    ==================  ===========  =============================================
-
-
-The auth.toml file
-''''''''''''''''''
-
-Credentials are stored in the ``auth.toml`` file, under the ``[authentication]`` section. There is a correlation between the repository name and the authentication section's name::
 
     [authentication]
 
@@ -89,10 +71,16 @@ Credentials are stored in the ``auth.toml`` file, under the ``[authentication]``
     password = "YmFyCg=="
 
 
-Instead of specifying the credentials in this file, Keyring can be used::
+A repository has the following attributes::
 
-    keyring set https://pypi.org/simple/ __token__
-    keyring set <repository URL> <private-repository username>
+    ==================  ===========  =============================================
+    Attribute           Type         Description
+    ==================  ===========  =============================================
+    final               bool         Make it impossible to override/remove the repository configuration (default: false)
+    proxy_url           str          The URL to the proxy server, can contain a port
+    shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
+    url                 str          URL to repository, can contain a port
+    ==================  ===========  =============================================
 
 
 A repository's credentials has the following attributes::
@@ -110,6 +98,28 @@ A repository's credentials has the following attributes::
     ==================  ===========  ===============================================
 
 
+Tools preferring to look up credentials from other locations, such as keyring, are advised to use the full repository URL as the key, rather than the index name or hostname.
+
+
+The auth.toml file
+''''''''''''''''''
+
+Optionally, authentication can be defined in a separate ``auth.toml``. This way, credentials can be separated from repository URLs.
+
+Example ``auth.toml``::
+
+    [authentication]
+
+    [authentication.pypi]
+    username = "__token__"
+    password = "pypi-AgEIcHlwaS5vcmcCJDJjMmI5NDJmLWIzNzQtNDc3ZC04ZmRkLTM4NDEzY2M1ZTU5MAACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgV91r8iEUUz7Q5xbsfi_KGiO3wrJR2_IOOpnFyLo62bk"
+
+    [authentication.myrepo1]
+    username = "foo"
+    password = "YmFyCg=="
+
+
+
 Package discovery
 -----------------
 
@@ -121,7 +131,7 @@ The order of the repository definitions in ``config.toml`` shall be respected wh
 Configuration file discovery
 ----------------------------
 
-The locations of the configuration files vary slightly across platforms. You may have per-user, per-virtualenv or global (shared amongst all users) configuration:
+The locations of the configuration files (``config.toml`` and ``auth.toml``) vary slightly across platforms. You may have per-user, per-virtualenv or global (shared amongst all users) configuration:
 
 If multiple configuration files are found, then they are combined (merge and override) in the following order:
 
