@@ -105,7 +105,7 @@ Tools preferring to look up credentials from other locations, such as keyring, a
 The auth.toml file
 ''''''''''''''''''
 
-Optionally, authentication can be defined in a separate ``auth.toml``. This way, credentials can be fully or partially separated from repository URLs. The ``auth.toml`` takes precedence over ``config.toml``.
+Optionally, authentication can be defined in a separate ``auth.toml``. This way, credentials can be fully or partially separated from repository URLs.
 
 Example ``auth.toml``::
 
@@ -168,6 +168,13 @@ Per-virtualenv
 * macOS: ``$VIRTUAL_ENV/.python/``
 * Windows: ``%VIRTUAL_ENV%\.python\``
 
+
+Configuration file merging
+''''''''''''''''''''''''''
+
+The way the configuration files are merged is by "deep dictionary update", where the ``config.toml`` is updated with any values of the ``auth.toml`` in the same location.
+
+To do: Python code snippet here to illustrate the exact logic.
 
 
 Backwards Compatibility
