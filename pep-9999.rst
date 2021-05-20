@@ -140,7 +140,7 @@ If multiple configuration files are found, then they are merged in the following
 
 1. The global files are read
 2. The per-user files are read
-3. The virtualenv-specific files are read
+3. The per-environment files are read
 
 
 Global
@@ -159,12 +159,12 @@ Per-user
 * Windows: ``%APPDATA%\python\``
 
 
-Per-virtualenv
-''''''''''''''
+Per-environment
+'''''''''''''''
 
-* Unix: ``$VIRTUAL_ENV/.python/``
-* macOS: ``$VIRTUAL_ENV/.python/``
-* Windows: ``%VIRTUAL_ENV%\.python\``
+* Unix: ``sys.prefix``
+* macOS: ``sys.prefix``
+* Windows: ``sys.prefix``
 
 
 Configuration file merging strategy
@@ -215,6 +215,16 @@ Order or repositories defined in toml dictates priority
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 The order in which the repositories are defined in ``config.toml`` and/or ``auth.toml`` will not be used as the order of priority in which packages are to be discovered.
+
+
+Read configuration files per-virtualenv
+'''''''''''''''''''''''''''''''''''''''
+
+Originally, it was proposed that configuration files were discovered per-virtualenv, but `sys.prefix` was deemed more flexible, as it also works for activated virtual environments:
+
+* Unix: ``$VIRTUAL_ENV/.python/``
+* macOS: ``$VIRTUAL_ENV/.python/``
+* Windows: ``%VIRTUAL_ENV%\.python\``
 
 
 Open Issues
