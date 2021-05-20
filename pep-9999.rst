@@ -156,7 +156,7 @@ Per-user
 
 * Unix: ``$HOME/.config/python/``
 * macOS: ``$HOME/.config/python/``
-* Windows: ``%APPDATA%\python\``
+* Windows: ``%APPDATA%\Python\`` (note, this is Roaming app data, not Local)
 
 
 Per-environment
