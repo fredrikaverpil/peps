@@ -10,13 +10,19 @@ Post-History: <dates of postings to python-ideas and/or python-dev>
 Abstract
 ========
 
-This PEP standardizes configuration of PyPI repositories.
+This PEP standardizes configuration of Python package indexes.
+
+Initially, this standard is limited to support package indexes which are deployments of
+Warehouse [1]_ (like PyPI.org [2]_) but can in the future be extended to support other
+types of package indexes.
 
 
 Motivation
 ==========
 
-Workflow tools come up with their own configuration mechanisms for PyPI repositories, as there is no standard for this. This causes fragmentation and pain points.
+Workflow tools come up with their own configuration mechanisms for Python package
+indexes, as there is no standard for this. This causes fragmentation and
+pain points.
 
 Examples of such configuration files:
 
@@ -28,7 +34,13 @@ Examples of such configuration files:
 Rationale
 =========
 
-While this PEP aim to come up with a unified PyPI repository configuration, thought has been given so to be able to extend the configuration later. For example, PyPI repositories are assumed in this PEP, but a ``type`` attribute could be introduced which would default to ``pypi`` down the line, to allow for other package repository types. Any tool could also start taking advantage of the fact that the configuration files and their discovery is a standard, and use this for their own configuration.
+While this PEP aim to come up with a unified Python package index configuration,
+thought has been given so to be able to extend the configuration later. For example,
+Warehouse [1]_ repositories are assumed in this PEP, but a ``type`` attribute could be
+introduced which would default to e.g. ``warehouse`` down the line, to allow for other
+package index types. Any tool could also start taking advantage of the fact that the
+configuration files and their discovery is a standard, and use this for their own
+configuration.
 
 
 Specification
@@ -42,7 +54,7 @@ Configuration definition
 
 The configuration is split into two files:
 
-* ``config.toml`` for PyPI repository configuration
+* ``config.toml`` for Python package index configuration
 * ``auth.toml`` for credentials
 
 
@@ -99,13 +111,16 @@ A repository's credentials has the following attributes::
     ==================  ===========  ===============================================
 
 
-Tools preferring to look up credentials from other locations, such as keyring, are advised to use the full repository URL as the key, rather than the index name or hostname.
+Tools preferring to look up credentials from other locations, such as keyring, are
+advised to use the full package index URL as the key, rather than the index name or
+hostname.
 
 
 The auth.toml file
 ''''''''''''''''''
 
-Optionally, authentication can be defined in a separate ``auth.toml``. This way, credentials can be fully or partially separated from repository URLs.
+Optionally, authentication can be defined in a separate ``auth.toml``. This way,
+credentials can be fully or partially separated from package index URLs.
 
 Example ``auth.toml``::
 
@@ -119,16 +134,23 @@ Example ``auth.toml``::
 Package discovery
 -----------------
 
-PyPI
-''''
+PyPI.org
+''''''''
 
-The PyPI repository (``repositories.pypi``) does not have to be specified in the ``config.toml``. If not specified, it will be used as the first package index by default. However, by explicitly defining it, the repository attributes can be used and it can be prioritized differently.
+The PyPI.org repository (``repositories.pypi``) does not have to be specified in the
+``config.toml``. If not specified, it will be used as the first package index by
+default. However, by explicitly defining it, the repository attributes can be used and
+it can be prioritized differently.
 
 
 Package index priority
 ''''''''''''''''''''''
 
-Tools should respect priority by acting as if all lower priority repositories were not specified when a higher priority repository satisfies the task. Tools that choose not to respect priority MUST display a warning to users when a non-zero priority value is being ignored. It is acceptable for tools to be less efficient in order to handle prioritized repositories, for example, by not performing queries in parallel.
+Tools should respect priority by acting as if all lower priority package index were not
+specified when a higher priority package index satisfies the task. Tools that choose not
+to respect priority MUST display a warning to users when a non-zero priority value is
+being ignored. It is acceptable for tools to be less efficient in order to handle
+prioritized package indexes, for example, by not performing queries in parallel.
 
 
 Configuration file discovery
@@ -172,7 +194,8 @@ Configuration file merging strategy
 
 The way the configuration files are merged is by "deep dictionary update", where the ``config.toml`` is updated with any values of the ``auth.toml`` in the particular location. In short, the keys and values are accumulated, where ``auth.toml`` takes precedence in the case of duplicate keys for the given location.
 
-There is no way to _remove_ data from the configuration which has once been defined. However, repositories can be disabled using the ``enable`` attribute.
+There is no way to _remove_ data from the configuration which has once been defined.
+However, package indexes can be disabled using the ``enable`` attribute.
 
 To do: Python code snippet here to illustrate the exact logic.
 
@@ -211,10 +234,12 @@ Base64 encoding for passwords were considered, to avoid "over the shoulder" peek
 However, this complicates being able to tell the difference between a password and a token.
 
 
-Order or repositories defined in toml dictates priority
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Package index definition order dictates priority order
+''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-The order in which the repositories are defined in ``config.toml`` and/or ``auth.toml`` will not be used as the order of priority in which packages are to be discovered.
+The order in which the package indexes are defined in ``config.toml`` and/or
+``auth.toml`` will not be used as the order of priority in which packages are to be
+discovered.
 
 
 Read configuration files per-virtualenv
@@ -236,7 +261,8 @@ Open Issues
 References
 ==========
 
-[A collection of URLs used as references through the PEP.]
+.. [1] Warehouse `<https://github.com/pypa/warehouse>`_
+.. [2] PyPI.org `<https://pypi.org>`_
 
 
 Copyright
