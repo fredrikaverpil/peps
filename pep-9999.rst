@@ -91,7 +91,6 @@ A package index has the following attributes::
     final               bool         Make it impossible to override/remove the package index configuration (default: false)
     priority            int          Order of priority, sorted descending (default: 0)
     proxy_url           str          The URL to the proxy server, can contain a port
-    shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
     url                 str          URL to repository, can contain a port
     ==================  ===========  =============================================
 
@@ -242,6 +241,15 @@ The order in which the package indexes are defined in ``config.toml`` and/or
 discovered.
 
 
+Shadowing
+'''''''''
+
+Shadowing implies "fallback" and the instructions "Use package from this index" implies
+this takes priority. This can be cause for a fair amount of reasoning issues and can
+also have concerns around PEP-610 [3]_ and lock files. With shadowing, behavior of
+downstream tools are dictated.
+
+
 Read configuration files per-virtualenv
 '''''''''''''''''''''''''''''''''''''''
 
@@ -263,6 +271,7 @@ References
 
 .. [1] Warehouse `<https://github.com/pypa/warehouse>`_
 .. [2] PyPI.org `<https://pypi.org>`_
+.. [3] PEP-610 `<https://www.python.org/dev/peps/pep-0610/>`_
 
 
 Copyright
