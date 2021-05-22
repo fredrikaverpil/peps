@@ -63,32 +63,32 @@ The config.toml file
 
 Package index configuration is defined in the ``config.toml`` file::
 
-
-    [repositories]
-
-    [repostiories.pypi]
+    [[package_indexes]]
+    name = "pypi"
     url = "https://pypi.org/simple/"
 
-    [repostiories.myrepo1]
+    [[package_indexes]]
+    name = "myrepo1"
     url = "http://myserver2.org/simple"
 
-    [authentication]
 
-    [authentication.pypi]
+    [[credentials]]
+    package_index_name = "pypi"
     username = "__token__"
     password = "pypi-AgEIcHlwaS5vcmcCJDJjMmI5NDJmLWIzNzQtNDc3ZC04ZmRkLTM4NDEzY2M1ZTU5MAACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgV91r8iEUUz7Q5xbsfi_KGiO3wrJR2_IOOpnFyLo62bk"
 
-    [authentication.myrepo1]
+    [[credentials]]
+    package_index_name = "myrepo1"
     username = "foo"
     password = "YmFyCg=="
 
 
-A repository has the following attributes::
+A package index has the following attributes::
 
     ==================  ===========  =============================================
     Attribute           Type         Description
     ==================  ===========  =============================================
-    final               bool         Make it impossible to override/remove the repository configuration (default: false)
+    final               bool         Make it impossible to override/remove the package index configuration (default: false)
     priority            int          Order of priority, sorted descending (default: 0)
     proxy_url           str          The URL to the proxy server, can contain a port
     shadow              bool         Use package from this index, even if it was found in a previous index (default: false)
@@ -96,7 +96,7 @@ A repository has the following attributes::
     ==================  ===========  =============================================
 
 
-A repository's credentials has the following attributes::
+A package index's credentials has the following attributes::
 
     ==================  ===========  ===============================================
     Attribute           Type         Description
@@ -104,6 +104,7 @@ A repository's credentials has the following attributes::
     cert                str          Path to certificate authority bundle (*.pem)
     cert-client         str          Path to client certificate (*.pem)
     enabled             bool         Whether the repository should be used or not (default: true)
+    package_index_name  str          The corresponding package index name, defined in ``config.toml``
     password            str          The password for the repository
     proxy_password      str          The password for the proxy server
     proxy_username      str          The username for the proxy server
@@ -124,9 +125,8 @@ credentials can be fully or partially separated from package index URLs.
 
 Example ``auth.toml``::
 
-    [authentication]
-
-    [authentication.myrepo1]
+    [[credentials]]
+    package_index_name = "myrepo1"
     username = "foo"
     password = "YmFyCg=="
 
