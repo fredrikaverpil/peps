@@ -1,5 +1,5 @@
 PEP: 9999
-Title: Package index configuration standardization
+Title: Specifying Package index configuration
 Author: Fredrik Averpil <fredrik at averpil.com>
 Status: Draft
 Type: Informational
@@ -10,11 +10,9 @@ Post-History: <dates of postings to python-ideas and/or python-dev>
 Abstract
 ========
 
-This PEP standardizes configuration of Python package indexes.
+This PEP specifies how Python package index configuration should be configured independent of the client tools using them. As part of this specification, a new configuration file is introduced for client tools to use to read index specific configuration. 
 
-Initially, this standard is limited to support package indexes which are deployments of
-Warehouse [1]_ (like PyPI.org [2]_) but can in the future be extended to support other
-types of package indexes.
+We idenitfy a Package index as a service that implements the JSON API and/or Legacy API as described by the Warehouse [1]_ project (like PyPI.org [2]_) . In the future, this can be extended to support other package sources like link soruces (html).
 
 
 Motivation
@@ -241,13 +239,7 @@ The order in which the package indexes are defined in ``config.toml`` and/or
 discovered.
 
 
-Shadowing
-'''''''''
-
-Shadowing implies "fallback" and the instructions "Use package from this index" implies
-this takes priority. This can be cause for a fair amount of reasoning issues and can
-also have concerns around PEP-610 [3]_ and lock files. With shadowing, behavior of
-downstream tools are dictated.
+Shadowing can imply "fallback" and the behaviour is not deterministic. This can potentially make it harder to reason about runtime behaviour. In cases where PEP-610 [3]_ and/or lock files are used, the non-deterministic bhaviour can cause conflicts with downstream tool's intended behaviour.
 
 
 Read configuration files per-virtualenv
