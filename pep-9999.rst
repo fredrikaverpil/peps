@@ -165,7 +165,7 @@ If multiple configuration files are found, then they are merged in the following
 Global
 ''''''
 
-* Unix: ``/etc/.config/python/``
+* Unix: ``/etc/python/``
 * macOS: ``/Library/Application Support/python/``
 * Windows: ``%PROGRAMDATA%\Python``
 
@@ -294,6 +294,12 @@ Originally, it was proposed that configuration files were discovered per-virtual
 * Unix: ``$VIRTUAL_ENV/.python/``
 * macOS: ``$VIRTUAL_ENV/.python/``
 * Windows: ``%VIRTUAL_ENV%\.python\``
+
+
+Global unix location
+''''''''''''''''''''
+
+Originally, ``/etc/.config/python`` was proposed, but this was rejected in favor for ``/etc/python``.
 
 
 Open Issues
